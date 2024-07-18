@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "terraform-public-repo",
+			"path": "."
+		},
+		{
+			"name": "solution-private-connections",
+			"path": "../TF1/solution-private-connections"
+		}
+	],
+	"settings": {}
+}
