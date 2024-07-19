@@ -5,6 +5,7 @@ locals {
   bastion_name = "${terraform.workspace}-${lookup(var.nestedmap, "key2")}-${lookup(var.enviroment, "key1")}-${var.bastion_name}"
   vm_name = "${terraform.workspace}-${lookup(var.nestedmap, "key1")}-${lookup(var.enviroment, "key1")}-${var.vm_name}"
   public_ip_name = "${terraform.workspace}-${lookup(var.enviroment, "key1")}-${each.key}-${var.location}"
+  extension-first-name = "${terraform.workspace}-${lookup(var.enviroment, "key1")}-${element(var.nameext, lenght(var.nameext) 1)}"
 
   virtual_network= {
     name = "vn2et"

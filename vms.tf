@@ -109,7 +109,6 @@ resource "azurerm_virtual_machine" "vm3" {
   vm_size = "Standard_B1ms"
   delete_data_disks_on_termination = true
   delete_os_disk_on_termination = true
-  custom_data = filebase64("${path.module}/solution-private-connections/myapp.html")
 
   storage_image_reference {
     sku = "2019-datacenter-gensecond"
@@ -133,6 +132,7 @@ resource "azurerm_virtual_machine" "vm3" {
     computer_name = "vm"
     admin_password = var.password
     admin_username = "enklau"
+    custom_data = filebase64("${path.module}/solution-private-connections/myapp.html")
   }
 
 
@@ -142,6 +142,17 @@ resource "azurerm_virtual_machine" "vm3" {
     azurerm_public_ip.pipp,
     azurerm_network_interface.nic2
   ]
+}
+
+resource "azurerm_virtual_machine_extension" "extension-1" {
+  name = local.extension-first-name
+  publisher = "microsoft.compute"
+  type_handler_version = "1.8"
+  type = "CustomScriptExtension"
+  virtual_machine_id = azurerm_virtual_machine.vm1.id
+  settings = jsonencode({
+    "CommandToExecute" : "Install-WindowsFeature -name Web-server",
+  })
 }
 
 resource "azurerm_network_interface" "nic" {

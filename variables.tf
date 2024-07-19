@@ -70,3 +70,8 @@ variable "address_space_1" {
   type = list(string)
   default = ["10.0.0.0/16","10.1.0.0/16"]
 }
+
+variable "nameext" {
+  type        = list(string)
+  default     = ["extension1","extension2"]
+}
